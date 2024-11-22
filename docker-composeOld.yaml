@@ -9,29 +9,19 @@ services:
       - .:/app # Monte le dossier actuel dans le conteneur
       - /app/node_modules # Évite les conflits avec node_modules de l'hôte
     environment:
-      - NODE_ENV=development
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=nom_de_la_base
-    networks:
-      - app_network
+      NODE_ENV: development
 
   db:
     image: postgres:17
     environment:
-      - POSTGRES_USER=superadmin
-      - POSTGRES_PASSWORD=superpassword
-      - POSTGRES_DB=nom_de_la_base
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: nom_de_la_base
     ports:
       - "5432:5432" # Expose le port 5432 pour PostgreSQL
     volumes:
       - db-data:/var/lib/postgresql/data
-    networks:
-      - app_network
 
 
 volumes:
   db-data:
-
-networks:
-  app_network:
